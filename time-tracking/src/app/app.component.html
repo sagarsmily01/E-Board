@@ -1,0 +1,54 @@
+<div>
+  <nav class="navbar navbar-light bg-light">
+    <span class="container">
+      <img src="https://open-frontend-bucket.s3.amazonaws.com/interviews/001/logo.svg" alt="">
+      <span class="timeSpnd">
+        <p>Total Time Spend: {{timeSpend}} hr</p>
+      </span>
+    </span>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let task of taskNameArray" class="box">
+        <span class="heading">
+          {{task.name}}
+        </span>
+        <div class="history">
+          <div>
+            <p>History</p>
+            <p *ngIf="task.startFlag">Started the timer at {{getStartTime + ' (Active)'}}</p>
+            <p *ngIf="!task.startFlag && !getTaskHistoryCount(task.id)">No History Found, Click on the start button to track the timer</p>
+          </div>
+          <div *ngIf="timeHis.length > 0">
+            <div *ngFor="let tm of timeHis">
+              <p *ngIf="tm.cardId == task.id">Started the timer at {{tm.strTime + ' ' + '& Stopped at ' + tm.stpTime}}</p>
+            </div>
+          </div>
+        </div>
+        <span class="box2">
+          <span class="symbol">| &nbsp;&nbsp;</span>
+          <span style="color: #7176f0; margin-right: 6%;">
+            <span id="hour">{{task.hour}}</span>:<span id="minute">{{task.minut}}</span>:<span id="second">{{task.second}}</span>
+          </span>
+          <button id="start" *ngIf="!task.startFlag" (click)="startTimer(task.id)" class="btn btn-primary btn1">Start</button>
+          <button id="stop" *ngIf="task.startFlag" style="background-color: #ED5050;" (click)="stopTimer(task.id)" class="btn btn-primary btn1">Stop</button>
+          &nbsp;&nbsp;<span (click)="deleteTask(task.id)"><i style="font-size: 40px;color: #d9d9d9;position: relative;top: 10px;" class="bi-x-circle-fill"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div class="addBtn">
+  <span (click)="open(openTask)"><i style="font-size: 40px; color: #5056ed;" class="bi bi-plus-circle-fill"></i></span>
+</div>
+
+<ng-template #openTask let-modal>
+  <div class="container cView">
+    <label>Enter the Task Name</label>
+    <input type="text" name="taskName" class="" autocomplete="off" placeholder="Task Name" [(ngModel)]="taskName">
+    <p></p>
+    <button type="button" (click)="addTask(modal)" class="btn btn-primary btn1">Save</button>
+  </div>
+</ng-template>

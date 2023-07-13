@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    // background-color: #e7e9eb;
+    background-color:  #F2F6F8;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  .modal-dialog {
+    max-width: 550px ;
+    margin: 0 auto;
+    top: 25%;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+    border-radius: 25px ;
+    height: 198px ;
+}
